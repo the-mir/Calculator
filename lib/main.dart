@@ -13,7 +13,9 @@ class calculator extends StatefulWidget {
   State<calculator> createState() => _calculatorState();
 }
 
-String input='';
+String input='',value='',finalResult='';
+
+int add=0,add2=0,result=0,sum=0;
 class _calculatorState extends State<calculator> {
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,65 @@ class _calculatorState extends State<calculator> {
           centerTitle: true,
            backgroundColor: Color.fromARGB(255, 2, 81, 85),
         ),
+        drawer: Drawer(
+           backgroundColor: Color.fromARGB(234, 3, 73, 77),
+          child: ListView(
+            children: [
+              Stack(
+                children: [
+                  Image.asset('assets/images/img1.jpg'),
+                  Positioned(
+                    left: 110,
+                    top: 10,
+                    child: Center(
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        child: Image.asset('assets/images/profile.png'),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 40,
+                    top: 82,
+                    child: Center(
+                      child: Text(
+                        'Mir Md. Mosarof Hossan Showrav',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,fontSize: 12),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 100,
+                    top: 100,
+                    child: Center(
+                      child: Text(
+                        'Flutter Developer',
+                        style: TextStyle(
+                          color: Colors.white,fontSize: 10,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 40,
+                    top: 116,
+                    child: Center(
+                      child: Text(
+                        'Email : showravofficial@gmail.com',
+                        style: TextStyle(
+                          color: Colors.white, fontSize: 11,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -37,23 +98,11 @@ class _calculatorState extends State<calculator> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('10+10',style: TextStyle(fontSize: 40.0),),
-                      Text(' = 20',style: TextStyle(fontSize: 40.0),)
+                      Text(input,
+                        style: TextStyle(fontSize: 40.0),),
+                      Text(finalResult ,
+                        style: TextStyle(fontSize: 40.0),)
                     ],
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: Text('Clear',style: TextStyle(fontSize: 36.0),),
-                      color: Color.fromARGB(255, 2, 81, 85),
-                      alignment: Alignment.center,
-                    ),
                   )
                 ],
               ),
@@ -67,10 +116,18 @@ class _calculatorState extends State<calculator> {
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      child: Text('1',style: TextStyle(fontSize: 36.0),),
-                      color: Color.fromARGB(255, 2, 81, 85),
-                      alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          input =input+'1';
+                          value=value+'1';
+                        });
+                      },
+                      child: Container(
+                        child: Text('1',style: TextStyle(fontSize: 36.0),),
+                        color: Color.fromARGB(255, 2, 81, 85),
+                        alignment: Alignment.center,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -100,10 +157,20 @@ class _calculatorState extends State<calculator> {
                     width: 5,
                   ),
                   Expanded(
-                    child: Container(
-                      child: Text('+',style: TextStyle(fontSize: 36.0),),
-                      color: Color.fromARGB(255, 2, 81, 85),
-                      alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          input= input + '+';
+                          add=int.parse(value);
+                          value='';
+                          sum=1;
+                        });
+                      },
+                      child: Container(
+                        child: Text('+',style: TextStyle(fontSize: 36.0),),
+                        color: Color.fromARGB(255, 2, 81, 85),
+                        alignment: Alignment.center,
+                      ),
                     ),
                   )
                 ],
@@ -251,11 +318,20 @@ class _calculatorState extends State<calculator> {
                     width: 5,
                   ),
                   Expanded(
-                    child: Container(
-                      child:
-                      Text('=',style: TextStyle(fontSize: 36.0),),
-                      color: Color.fromARGB(255, 2, 81, 85),
-                      alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                              add2=int.parse(value);
+                              result=add+add2;
+                              finalResult= '=' +result.toString();
+                        });
+                      },
+                      child: Container(
+                        child:
+                        Text('=',style: TextStyle(fontSize: 36.0),),
+                        color: Color.fromARGB(255, 2, 81, 85),
+                        alignment: Alignment.center,
+                      ),
                     ),
                   ),
                   SizedBox(
